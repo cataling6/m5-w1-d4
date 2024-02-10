@@ -1,11 +1,10 @@
 import { Navbar } from "react-bootstrap"
-import Logo from "./logo.svg"
-const MyLogo = () => {
+const MyLogo = (props) => {
     return <div>
         {
             <Navbar.Brand href="#home">
                 <img
-                    src={Logo}
+                    src={props.Logo}
                     width="30"
                     height="30"
                     className="d-inline-block align-top"
