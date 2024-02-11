@@ -29,16 +29,15 @@ export const AllTheBooks = () => {
                     <Card style={{ width: '18rem' }}>
                         <Card.Img variant="top" src={element.img} className="hover" />
                         <Card.Body>
-                            {/* <Card.Title>{element.title}</Card.Title> */}
-                            <Card.Text>
-                                {element.category}
+                            <Card.Title className="text-truncate pointer" title={element.title}>{element.title}</Card.Title>
+                            <Card.Text className="d-flex justify-content-between">
+                                <span>{element.category}</span>
+                                <span>{element.price} €</span>
                             </Card.Text>
-
                         </Card.Body>
                     </Card>
                 ))}
             </div>
-
         </div>
     )
 }

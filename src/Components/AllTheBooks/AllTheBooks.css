@@ -6,3 +6,11 @@
 .card img:hover{    
     opacity: 0.7;
 }
+
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bd-violet-bg);
+  --bs-tooltip-color: var(--bs-white);
+}
+.pointer{
+    cursor: pointer;
+}
