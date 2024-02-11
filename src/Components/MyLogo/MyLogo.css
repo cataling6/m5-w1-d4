@@ -1,0 +1,7 @@
+.custom-logo {
+    transition: 1s all;
+}
+
+.custom-logo:hover{
+    transform: scale(1.4);
+}

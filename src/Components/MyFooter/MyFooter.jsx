@@ -1,19 +1,13 @@
 import { Nav } from "react-bootstrap"
 import { Container } from "react-bootstrap"
 import { Navbar } from "react-bootstrap";
+import "./MyFooter.css"
 import MyLogo from "../MyLogo/MyLogo";
 import logo from "../MyLogo/logo.svg"
+import MyNav from "../MyNav/MyNav";
 const MyFooter = () => {
     return <div>
-
-        <Navbar bg="dark" data-bs-theme="dark" className="d-flex align-self-end">
-            <Container>
-                <MyLogo Logo={logo} />
-                <Nav className="me-auto">
-
-                </Nav>
-            </Container>
-        </Navbar>
+        <MyNav link1="Instagram" link2="Facebook" />
 
     </div>
 }

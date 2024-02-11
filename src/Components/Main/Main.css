@@ -1,0 +1,7 @@
+.custom-height {
+    background-color: rgb(255, 255, 255);
+    overflow: auto;
+    height: calc(100vh - 112px);
+    scrollbar-color: gray;
+    scrollbar-width: thin;
+}

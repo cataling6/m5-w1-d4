@@ -9,7 +9,8 @@ function MyNav(props) {
         <div>
             <Navbar bg="dark" data-bs-theme="dark">
                 <Container>
-                    <MyLogo Logo={Logo} />
+                    {props.Logo ? <MyLogo Logo={Logo} /> : ""
+                    }
                     <Nav className="me-auto">
                         <Nav.Link href="#home">{props.link1}</Nav.Link>
                         <Nav.Link href="#features">{props.link2}</Nav.Link>

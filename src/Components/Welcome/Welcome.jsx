@@ -9,8 +9,8 @@ export const Welcome = () => {
 
         if (alertShown)
             Swal.fire({
-                title: 'Error!',
-                text: 'Do you want to continue',
+                title: 'Informazione:',
+                text: 'Questo è un alert modificato con SweetAlert',
                 icon: 'info',
                 showConfirmButton: true,
                 allowOutsideClick: false,
