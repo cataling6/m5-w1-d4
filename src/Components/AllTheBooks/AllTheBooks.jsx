@@ -1,26 +1,46 @@
 import { Card } from "react-bootstrap";
 import "./AllTheBooks.css"
 import { useState, useEffect } from "react";
-
+import "./fantasy.json"
 //https://epibooks.onrender.com/
 export const AllTheBooks = () => {
     const [books, setBooks] = useState([]);
 
-    const getBooks = async () => {
-        try {
-            const result = await fetch("https://epibooks.onrender.com/history");
-            const data = await result.json();
+    // const getBooks = async () => {
+    //     try {
+    //         const result = await fetch("https://epibooks.onrender.com/history");
+    //         const data = await result.json();
 
-            return setBooks(data);
+    //         return setBooks(data);
+
+    //     } catch (e) {
+    //         console.log("erore", e);
+    //     }
+    // }
+
+    console.log(books);
+    useEffect(() => {
+        getBooks();
+    }, []);
+
+
+    const getBooks = () => {
+        try {
+            fetch('./scifi.json')
+                .then((resp) => resp.json())
+                .then((jsonData) => {
+                    setBooks(jsonData);
+                })
+                .catch((e) => {
+                    console.error("Errore", e);
+                })
 
         } catch (e) {
             console.log("erore", e);
         }
     }
-    console.log(books);
-    useEffect(() => {
-        getBooks();
-    }, []);
+
+
     return (
 
         <div className="container ">
