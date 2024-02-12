@@ -6,11 +6,11 @@ import { useState, useEffect } from "react";
 //https://epibooks.onrender.com/
 export const AllTheBooks = () => {
     const [books, setBooks] = useState([]);
-    const [booksTemp, setBooksTemp] = useState([]);
+    const [booksTemp, setBooksTemp] = useState([]); //variabile temporanea che andrò a resettare con quella "definitiva" sopra definita
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("");
     const [searchValue, setSearchValue] = useState("");
-    //const [controlSearch, setControlSearch] = useState(false);
+
 
 
     const getBooks = async () => {
