@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Logo from "../MyLogo/logo.svg"
 import MyLogo from '../MyLogo/MyLogo';
 
+
 function MyNav(props) {
     return (
         <div>
@@ -16,6 +17,7 @@ function MyNav(props) {
                         <Nav.Link href="#features">{props.link2}</Nav.Link>
                         <Nav.Link href="#pricing">{props.link3}</Nav.Link>
                     </Nav>
+
                 </Container>
             </Navbar>
         </div>

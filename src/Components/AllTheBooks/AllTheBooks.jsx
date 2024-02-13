@@ -1,22 +1,24 @@
-import { Card } from "react-bootstrap";
+///import { Card } from "react-bootstrap";
 import "./AllTheBooks.css"
 import { useState, useEffect } from "react";
+import { SingleBook } from "../SingleBook/SingleBook.jsx"
 
 //import libri from "./fantasy.json"
 //https://epibooks.onrender.com/
+
 export const AllTheBooks = () => {
     const [books, setBooks] = useState([]);
     const [booksTemp, setBooksTemp] = useState([]); //variabile temporanea che andrò a resettare con quella "definitiva" sopra definita
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("");
     const [searchValue, setSearchValue] = useState("");
-
-
+    const [selected, setSelected] = useState(false);
+    console.log(selected);
 
     const getBooks = async () => {
         setLoading(true)
         try {
-            const result = await fetch("https://epibooks.onrender.com/history");
+            const result = await fetch("https://epibooks.onrender.com/scifi");
             const data = await result.json();
 
             setLoading(false);
@@ -28,16 +30,36 @@ export const AllTheBooks = () => {
 
         }
     }
-    //cercare il libro che contiene il valore di ricerca nel titolo, tutto in lowerCase
+    // //cercare il libro che contiene il valore di ricerca nel titolo, tutto in lowerCase - ricerca per books (prima del compiuto su sigle book)
+    // const filterBooks = (bookValue) => {
+    //     setBooksTemp(books);
+    //     let booksFiltered = books.filter((book) => book.title.toLowerCase().includes(bookValue.toLowerCase()))
+
+    //     setBooksTemp(booksFiltered);
+
+    // }
+
     const filterBooks = (bookValue) => {
         setBooksTemp(books);
         let booksFiltered = books.filter((book) => book.title.toLowerCase().includes(bookValue.toLowerCase()))
-        console.log(booksFiltered);
+
         setBooksTemp(booksFiltered);
 
     }
     const verifySearch = (e) => {
+        //const asin = e.target.closest
         setSearchValue(e.target.value)
+        e.target.value !== "" ? filterBooks(searchValue) : getBooks();
+    }
+
+
+    const handleClickOnImage = (e) => {
+        setSelected(!selected)
+
+        const cardSelected = e.target.closest('.card')
+        selected ? cardSelected.classList.add("border-danger") : cardSelected.classList.remove("border-danger")
+
+
     }
 
     useEffect(() => {
@@ -56,21 +78,27 @@ export const AllTheBooks = () => {
                 <div>{error}</div>
             )}
             {!loading && error === "" && (
-                <> <div>nr totale libri: {booksTemp.length}</div>
-                    <input type="text" placeholder="Cerca il tuo libro" value={searchValue} onChange={(e) => verifySearch(e)} />
-                    <button id="searchBtn" onClick={() => filterBooks(searchValue)}>Cerca</button>
-                    <div className="row d-flex gap-3">
+                <>
+                    <div className="d-flex justify-content-between">
+                        <h1>nr totale libri: {booksTemp.length}</h1>
+                        <div className="d-flex mb-2 col-lg-3 gap-2">
+                            <input type="text" className="form-control" placeholder="Cerca il tuo libro" value={searchValue} onChange={(e) => verifySearch(e)} />
+                            <button id="searchBtn" className="btn btn-success" onClick={() => filterBooks(searchValue)}>Cerca</button>
+                        </div>
+                    </div>
+                    <div className="row d-flex gap-3 justify-content-between" onClick={(e) => handleClickOnImage(e)}>
                         {booksTemp.map((element) => (
-                            <Card key={element.asin} style={{ width: '18rem' }}>
-                                <Card.Img variant="top" src={element.img} className="hover" />
-                                <Card.Body>
-                                    <Card.Title className="text-truncate pointer" title={element.title}>{element.title}</Card.Title>
-                                    <Card.Text className="d-flex justify-content-between">
-                                        <span>{element.category}</span>
-                                        <span>{element.price} €</span>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
+                            // <Card key={element.asin} style={{ width: '18rem' }}>
+                            //     <Card.Img variant="top" src={element.img} className="hover" />
+                            //     <Card.Body>
+                            //         <Card.Title className="text-truncate pointer" title={element.title}>{element.title}</Card.Title>
+                            //         <Card.Text className="d-flex justify-content-between">
+                            //             <span>{element.category}</span>
+                            //             <span>{element.price} €</span>
+                            //         </Card.Text>
+                            //     </Card.Body>
+                            // </Card>
+                            <SingleBook key={element.asin} title={element.title} img={element.img} asin={element.asin} />
                         ))}
                     </div>
                 </>
@@ -78,4 +106,6 @@ export const AllTheBooks = () => {
             }
         </div >
     )
+
 }
+
