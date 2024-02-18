@@ -12,8 +12,6 @@ export const AllTheBooks = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("");
     const [searchValue, setSearchValue] = useState("");
-    const [selected, setSelected] = useState(false);
-    console.log(selected);
 
     const getBooks = async () => {
         setLoading(true)
@@ -42,7 +40,6 @@ export const AllTheBooks = () => {
     const filterBooks = (bookValue) => {
         setBooksTemp(books);
         let booksFiltered = books.filter((book) => book.title.toLowerCase().includes(bookValue.toLowerCase()))
-
         setBooksTemp(booksFiltered);
 
     }
@@ -50,16 +47,6 @@ export const AllTheBooks = () => {
         //const asin = e.target.closest
         setSearchValue(e.target.value)
         e.target.value !== "" ? filterBooks(searchValue) : getBooks();
-    }
-
-
-    const handleClickOnImage = (e) => {
-        setSelected(!selected)
-
-        const cardSelected = e.target.closest('.card')
-        selected ? cardSelected.classList.add("border-danger") : cardSelected.classList.remove("border-danger")
-
-
     }
 
     useEffect(() => {
@@ -86,19 +73,9 @@ export const AllTheBooks = () => {
                             <button id="searchBtn" className="btn btn-success" onClick={() => filterBooks(searchValue)}>Cerca</button>
                         </div>
                     </div>
-                    <div className="row d-flex gap-3 justify-content-between" onClick={(e) => handleClickOnImage(e)}>
+                    <div className="row d-flex gap-3 justify-content-between">
                         {booksTemp.map((element) => (
-                            // <Card key={element.asin} style={{ width: '18rem' }}>
-                            //     <Card.Img variant="top" src={element.img} className="hover" />
-                            //     <Card.Body>
-                            //         <Card.Title className="text-truncate pointer" title={element.title}>{element.title}</Card.Title>
-                            //         <Card.Text className="d-flex justify-content-between">
-                            //             <span>{element.category}</span>
-                            //             <span>{element.price} €</span>
-                            //         </Card.Text>
-                            //     </Card.Body>
-                            // </Card>
-                            <SingleBook key={element.asin} title={element.title} img={element.img} asin={element.asin} />
+                            <SingleBook key={element.asin} title={element.title} img={element.img} asin={element.asin} sele />
                         ))}
                     </div>
                 </>
